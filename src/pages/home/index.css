@@ -1,0 +1,31 @@
+.header {
+  background-color: rgb(19, 139, 187);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+.header span {
+  background-color: white;
+  color: var(--primary-color);
+  padding: 0.2rem;
+}
+.searchbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  margin-top: -1.5rem;
+  position: sticky;
+  top: 0;
+}
+.searchresult-container {
+  width: 100%;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.course-container {
+  margin-bottom: 1rem;
+}
