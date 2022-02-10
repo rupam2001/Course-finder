@@ -40,7 +40,7 @@ export default function SearchBar({ coursesList }) {
   }, [coursesList]);
 
   const handleSearch = () => {
-    //
+    if (course == "" || childSubject == "") return;
     dispatch(
       searchCourse({ courseName: course, childSubject, date, isSelfPaced })
     );

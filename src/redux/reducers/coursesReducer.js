@@ -3,21 +3,7 @@ import { FETCH_COURSES, SEARCH_COURSES } from "../actions/types";
 
 const intialState = {
   courses: [],
-  searchCourses: [
-    // {
-    //   "Course Id": 301,
-    //   "Course Name": "Introduction to Artificial Intelligence",
-    //   Provider: "Udacity",
-    //   "Universities/Institutions": "Stanford University",
-    //   "Parent Subject": "Computer Science",
-    //   "Child Subject": "Artificial Intelligence",
-    //   Url: "https://www.ai-class.com/",
-    //   "Next Session Date": "Oct, 2011",
-    //   Length: 10,
-    //   "Video(Url)":
-    //     "https://www.youtube.com/watch?feature=player_embedded&v=BnIJ7Ba5Sr4",
-    // },
-  ],
+  searchCourses: [],
 };
 
 const courseReducer = (state = intialState, action) => {
@@ -63,6 +49,7 @@ const courseReducer = (state = intialState, action) => {
           null
         );
       });
+
       return {
         ...state,
         searchCourses: courses,
