@@ -24,7 +24,7 @@ export default function Home() {
     setPage(_page);
   };
   return (
-    <div>
+    <div className="home-main">
       <div className="header">
         <h2>Course Finder</h2>
         <h5>

@@ -1,3 +1,5 @@
+.home-main {
+}
 .header {
   background-color: rgb(19, 139, 187);
   color: white;
@@ -21,17 +23,16 @@
   top: 0;
 }
 .searchresult-container {
-  width: 100%;
   padding: 2rem;
   display: grid;
   grid-template-columns: auto auto auto;
   height: 100%;
+  justify-content: space-evenly;
 }
 .course-container {
   margin-bottom: 1rem;
 }
 .paggignation {
-  width: 100%;
   padding: 1rem;
   display: flex;
   justify-content: center;

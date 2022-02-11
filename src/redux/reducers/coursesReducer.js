@@ -20,31 +20,30 @@ const courseReducer = (state = intialState, action) => {
       );
 
       //filter by date
-      if (action.filters.date !== null || action.filters.date != "") {
-        courses = courses.filter((c) => {
-          if (
-            c["Next Session Date"] == "" ||
-            c["Next Session Date"] == "NA" ||
-            (c["Next Session Date"] == "Self paced" &&
-              !action.filters.isSelfPaced)
-          )
-            return false;
-          // if self paced
-          if (
-            c["Next Session Date"] == "Self paced" &&
-            action.filters.isSelfPaced
-          )
-            return true;
-          console.log(c["Next Session Date"]);
+      courses = courses.filter((c) => {
+        if (
+          c["Next Session Date"] == "" ||
+          c["Next Session Date"] == "NA" ||
+          (c["Next Session Date"] == "Self paced" &&
+            !action.filters.isSelfPaced)
+        )
+          return false;
+        if (
+          c["Next Session Date"] == "Self paced" &&
+          action.filters.isSelfPaced
+        )
+          return true;
 
-          const d = new Date(dateFormatter(c["Next Session Date"].toString()));
+        if (action.filters.date == null) return false;
 
-          return (
-            d.getTime() ==
-            new Date(dateFormatter(action.filters.date.toString())).getTime()
-          );
-        });
-      }
+        const d = new Date(dateFormatter(c["Next Session Date"].toString()));
+
+        return (
+          d.getTime() ==
+          new Date(dateFormatter(action.filters.date.toString())).getTime()
+        );
+      });
+
       // filter by name
       courses = courses.filter((c) => {
         return (
