@@ -1,4 +1,4 @@
-import { Grid, Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CourseCard from "../../components/Course-Card";
@@ -12,8 +12,8 @@ export default function Home() {
   const courses = useSelector((state) => state.courses);
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
-  const [pageNo, setPageNo] = useState(0);
-  const [totalPage, setTotalPage] = useState(0);
+  // const [pageNo, setPageNo] = useState(0);
+  // const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -38,7 +38,7 @@ export default function Home() {
         {courses.searchCourses
           .slice(page, page + cardsPerPage)
           .map((_courses) => (
-            <div className="course-container">
+            <div className="course-container" key={_courses["Course Id"]}>
               <CourseCard {..._courses} />
             </div>
           ))}

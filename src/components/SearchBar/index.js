@@ -19,7 +19,6 @@ export default function SearchBar({ coursesList }) {
   const [date, setDate] = useState(null);
   const [isSelfPaced, setIsSelfPaced] = useState(false);
 
-  const [courses, setCourses] = useState([]);
   const [childSubjects, setChildSubjects] = useState([]);
 
   const dispatch = useDispatch();
@@ -27,13 +26,13 @@ export default function SearchBar({ coursesList }) {
   useEffect(() => {
     // preprocess the data
     const _childSubjects = Array.from(
-      new Set(coursesList.map((_courses) => _courses["Child Subject"]))
+      new Set(coursesList.map((_courses) => _courses["Child Subject"])) // removes duplicate
     ).map((_c) => {
       return { label: _c };
     });
 
     setChildSubjects(_childSubjects);
-
+    //pressing enter performs searching
     window.addEventListener("keyup", (e) => {
       if (e.key == "13") handleSearch();
     });
@@ -48,7 +47,7 @@ export default function SearchBar({ coursesList }) {
 
   return (
     <div className="container">
-      <div>
+      <div className="field">
         <TextField
           id="outlined-basic"
           label="Course"
@@ -57,7 +56,7 @@ export default function SearchBar({ coursesList }) {
           onChange={(e) => setCourse(e.target.value)}
         />
       </div>
-      <div>
+      <div className="field">
         <Autocomplete
           options={childSubjects}
           sx={{ width: 300 }}
@@ -70,7 +69,7 @@ export default function SearchBar({ coursesList }) {
           )}
         />
       </div>
-      <div>
+      <div className="field">
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             label="Session"
@@ -82,7 +81,7 @@ export default function SearchBar({ coursesList }) {
           />
         </LocalizationProvider>
       </div>
-      <div>
+      <div className="field">
         <FormControlLabel
           control={
             <Checkbox
@@ -95,7 +94,7 @@ export default function SearchBar({ coursesList }) {
           label="Self Paced"
         />
       </div>
-      <div>
+      <div className="field">
         <Button variant="contained" onClick={handleSearch}>
           Search
         </Button>
