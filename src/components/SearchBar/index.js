@@ -13,7 +13,7 @@ import "./index.css";
 import { useDispatch } from "react-redux";
 import { searchCourse } from "../../redux/actions/searchCourseAction";
 
-export default function SearchBar({ coursesList }) {
+export default function SearchBar({ coursesList, setIsSearching }) {
   const [course, setCourse] = useState("");
   const [childSubject, setChildSubject] = useState("");
   const [date, setDate] = useState(null);
@@ -39,7 +39,14 @@ export default function SearchBar({ coursesList }) {
   }, [coursesList]);
 
   const handleSearch = () => {
-    if (course == "" || childSubject == "") return;
+    if (
+      course == "" &&
+      childSubject == "" &&
+      date == null &&
+      isSelfPaced == false
+    )
+      return;
+    setIsSearching(true);
     dispatch(
       searchCourse({ courseName: course, childSubject, date, isSelfPaced })
     );

@@ -12,8 +12,7 @@ export default function Home() {
   const courses = useSelector((state) => state.courses);
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
-  // const [pageNo, setPageNo] = useState(0);
-  // const [totalPage, setTotalPage] = useState(0);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -28,26 +27,46 @@ export default function Home() {
       <div className="header">
         <h2>Course Finder</h2>
         <h5>
-          Courses Found: <span>{courses.courses.length}</span>
+          Courses Found:{" "}
+          <span>
+            {isSearching
+              ? courses.searchCourses.length
+              : courses.courses.length}
+          </span>
         </h5>
       </div>
       <div className="searchbar-container">
-        <SearchBar coursesList={courses.courses} />
+        <SearchBar
+          coursesList={courses.courses}
+          setIsSearching={setIsSearching}
+        />
       </div>
       <div className="searchresult-container">
-        {courses.searchCourses
-          .slice(page, page + cardsPerPage)
-          .map((_courses) => (
-            <div className="course-container" key={_courses["Course Id"]}>
-              <CourseCard {..._courses} />
-            </div>
-          ))}
+        {isSearching
+          ? courses.searchCourses
+              .slice(page, page + cardsPerPage)
+              .map((_courses) => (
+                <div className="course-container" key={_courses["Course Id"]}>
+                  <CourseCard {..._courses} />
+                </div>
+              ))
+          : courses.courses.slice(page, page + cardsPerPage).map((_courses) => (
+              <div className="course-container" key={_courses["Course Id"]}>
+                <CourseCard {..._courses} />
+              </div>
+            ))}
       </div>
       <div className="paggignation">
-        {courses.searchCourses.length != 0 && (
+        {(courses.searchCourses.length != 0 || courses.courses.length != 0) && (
           <Pagination
-            count={Math.ceil(courses.searchCourses.length / cardsPerPage)}
+            count={
+              isSearching
+                ? Math.ceil(courses.searchCourses.length / cardsPerPage)
+                : Math.ceil(courses.courses.length / cardsPerPage)
+            }
             onChange={handlePageChange}
+            hidePrevButton
+            hideNextButton
           />
         )}
       </div>
